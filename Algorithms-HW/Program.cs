@@ -7,11 +7,3 @@ class Program
         Console.WriteLine("Hello, World!");
     }
 }
-
-class Week1
-{
-    static void Constant(int[] a)
-    {
-        
-    }
-}

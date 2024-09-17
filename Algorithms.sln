@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithms-HW", "Algorithms
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithms-Week-2-notes", "Algorithms-Week-2-notes\Algorithms-Week-2-notes.csproj", "{B7379615-C7F6-431C-93D6-FC584031881C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Week-2-HW", "Week-2-HW\Week-2-HW.csproj", "{B64BE65F-F5E5-4324-8431-1F31933D5A16}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{B7379615-C7F6-431C-93D6-FC584031881C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7379615-C7F6-431C-93D6-FC584031881C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7379615-C7F6-431C-93D6-FC584031881C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B64BE65F-F5E5-4324-8431-1F31933D5A16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B64BE65F-F5E5-4324-8431-1F31933D5A16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B64BE65F-F5E5-4324-8431-1F31933D5A16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B64BE65F-F5E5-4324-8431-1F31933D5A16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
