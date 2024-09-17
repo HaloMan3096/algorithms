@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithms-HW", "Algorithms-HW\Algorithms-HW.csproj", "{1E20EE46-AD79-40FD-9322-85DE922D3CCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithms-Week-2-notes", "Algorithms-Week-2-notes\Algorithms-Week-2-notes.csproj", "{B7379615-C7F6-431C-93D6-FC584031881C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E20EE46-AD79-40FD-9322-85DE922D3CCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E20EE46-AD79-40FD-9322-85DE922D3CCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E20EE46-AD79-40FD-9322-85DE922D3CCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E20EE46-AD79-40FD-9322-85DE922D3CCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7379615-C7F6-431C-93D6-FC584031881C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7379615-C7F6-431C-93D6-FC584031881C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7379615-C7F6-431C-93D6-FC584031881C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7379615-C7F6-431C-93D6-FC584031881C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
