@@ -10,7 +10,7 @@ class Program
 
 class Week1
 {
-    static void Constant()
+    static void Constant(int[] a)
     {
         
     }
