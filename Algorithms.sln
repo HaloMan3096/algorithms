@@ -1,10 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithms-HW", "Algorithms-HW\Algorithms-HW.csproj", "{1E20EE46-AD79-40FD-9322-85DE922D3CCE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithms-Week-2-notes", "Algorithms-Week-2-notes\Algorithms-Week-2-notes.csproj", "{B7379615-C7F6-431C-93D6-FC584031881C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Week-2-HW", "Week-2-HW\Week-2-HW.csproj", "{B64BE65F-F5E5-4324-8431-1F31933D5A16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Week-One-HW", "Week-One-HW\Week-One-HW.csproj", "{4791316D-99B6-41A1-8F64-C59BEE154D24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,10 +12,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1E20EE46-AD79-40FD-9322-85DE922D3CCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1E20EE46-AD79-40FD-9322-85DE922D3CCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1E20EE46-AD79-40FD-9322-85DE922D3CCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1E20EE46-AD79-40FD-9322-85DE922D3CCE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B7379615-C7F6-431C-93D6-FC584031881C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B7379615-C7F6-431C-93D6-FC584031881C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7379615-C7F6-431C-93D6-FC584031881C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -24,5 +20,9 @@ Global
 		{B64BE65F-F5E5-4324-8431-1F31933D5A16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B64BE65F-F5E5-4324-8431-1F31933D5A16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B64BE65F-F5E5-4324-8431-1F31933D5A16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4791316D-99B6-41A1-8F64-C59BEE154D24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4791316D-99B6-41A1-8F64-C59BEE154D24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4791316D-99B6-41A1-8F64-C59BEE154D24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4791316D-99B6-41A1-8F64-C59BEE154D24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
