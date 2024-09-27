@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Week-2-Match-HW", "Week-2-M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Week-One-HW", "Week-One-HW\Week-One-HW.csproj", "{4791316D-99B6-41A1-8F64-C59BEE154D24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithm-Creation-And-Analysis", "Algorithm-Creation-And-Analysis\Algorithm-Creation-And-Analysis.csproj", "{A7B9A2A2-8216-49F7-8109-6392A44C37EB}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Week-2-Pseudocode-HW", "Week-2-Pseudocode-HW\Week-2-Pseudocode-HW.csproj", "{FA7AF39E-4C0C-4CF6-A3B1-04D8B3EDDC60}"
 EndProject
 Global
