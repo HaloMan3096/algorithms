@@ -2,6 +2,7 @@
 
 internal abstract class Program
 {
+    // Preps the senario 
     private static void Main(string[] args)
     {
         var doll = new NestingDoll();
