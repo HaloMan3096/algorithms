@@ -1,19 +1,18 @@
-﻿using System.Runtime.CompilerServices;
-namespace Week_2_HW;
+﻿namespace Week_2_HW;
 
-class Program
+internal static class Program
 {
-    MainLoop mainLoop = new();
-    const int WIDTH_VALUE = 5;
-    const int HEIGHT_VALUE = 6;
-    static void Main(string[] args)
+    private const int WidthValue = 5;
+    private const int HeightValue = 6;
+
+    private static void Main()
     {
-        Grid area = new(WIDTH_VALUE,HEIGHT_VALUE);
+        Grid area = new(WidthValue,HeightValue);
         MainLoop.Run(area);
     }
 }
 
-class MainLoop
+internal static class MainLoop
 {
     public static void Run(Grid area) 
     {
@@ -22,32 +21,48 @@ class MainLoop
 
         // Get Input
         // we can escape by typing 'q' below
-        int col = (GetIntInput("Please enter a Column: ") - 1);
-        int row = (GetIntInput("Please enter a Row: ") - 1);
+        var selectedRow = (GetIntInput("Please enter a Row: ") - 1);
+        var selectedCol = (GetIntInput("Please enter a Column: ") - 1);
             
         // Use the input
-        Point selected = area.get_value(col, row);
-        Console.WriteLine(String.Format("{0},{1},{2}", col, row, selected)); // Debug TODO: remove this
+        var selected = area.get_value(selectedRow, selectedCol);
+        Console.WriteLine($"{selectedRow},{selectedCol},{selected.value}"); // Debug TODO: remove this
         if (selected.value == "-") // The selected values were not on the grid
         {
             Run(area); // We just re-run the function
         }
         Console.ReadLine();
         // We now know the selected value is real so now we can destroy it
-        area.destroy_value(col, row); // we "destroy" the selected point
-        area.update_value(col, row);
+        area.destroy_value(selectedRow, selectedCol); // we "destroy" the selected point
+        area.update_value(selectedRow, selectedCol);
+        
+        // We now check for matches 
+        var matches = area.check_match();
+        if (matches.Count == 0)
+        {
+            Console.WriteLine("No match");
+        }
+
+        if (matches.Count > 0)
+        {
+            Console.WriteLine("Matches:");
+            foreach (var p in matches)
+            {
+                Console.WriteLine(p.value);
+            }
+        }
             
         // repeat
         Console.Clear();
         Run(area); // we re-run the function here 
     }
 
-    static int GetIntInput(String q) // The same as column but for row
+    private static int GetIntInput(string q) // The same as column but for row
     {
         Console.Write(q);
-        string s = Console.ReadLine();
-        int i = 0; // Get and save the input
-        if (int.TryParse(s, out int number)) // Try to parse the string into an int
+        var s = Console.ReadLine();
+        var i = 0; // Get and save the input
+        if (int.TryParse(s, out var number)) // Try to parse the string into an int
         {
             i = number; // if it works then we set it and leave
         }
@@ -85,7 +100,7 @@ class MainLoop
     private static void Draw_bounds(Grid area)
     {
         Console.Write("-+");
-        for (int i = 0; i < area.grid[0].Length; i++)
+        for (var i = 0; i < area.grid[0].Length; i++)
         {
             Console.Write("-");
         }
@@ -95,9 +110,9 @@ class MainLoop
 
     private static void Display_grid(Grid area)
     {
-        for (int x = 0; x < area.grid.Length; x++) {
+        for (var x = 0; x < area.grid.Length; x++) {
             Console.Write((x + 1) + "|");
-            for (int y = 0; y < area.grid[x].Length; y++) {
+            for (var y = 0; y < area.grid[x].Length; y++) {
                 Console.Write(area.grid[x][y].value);
             }
             Console.Write("|");
@@ -106,7 +121,7 @@ class MainLoop
     }
 }
 
-class Grid {
+internal class Grid {
     public Point[][] grid;
 
     /// <summary>
@@ -116,7 +131,7 @@ class Grid {
     /// <param name="height"></param>
     public Grid( int width, int height ) {
         grid = new Point[height][]; // Set up the outside array
-        for (int i = 0; i < grid.Length; i++) // Set up the inner arrays
+        for (var i = 0; i < grid.Length; i++) // Set up the inner arrays
         {
             grid[i] = new Point[width];
         }
@@ -126,11 +141,11 @@ class Grid {
     private void fill_grid()
     {
         // we need to loop through the grid and set values
-        for (int x = 0; x < this.grid.Length; x++) // Loop through the outer arrays
+        foreach (var t in this.grid)
         {
-            for (int y = 0; y < this.grid[x].Length; y++) // Loop through the inner arrays
+            for (var y = 0; y < t.Length; y++) // Loop through the inner arrays
             {
-                this.grid[x][y] = new Point(Point.get_random_value()); // Set the "random" value
+                t[y] = new Point(Point.get_random_value()); // Set the "random" value
             }
         }
     }
@@ -163,26 +178,43 @@ class Grid {
         }
         this.update_value(x - 1, y); // as long as were not at the top of the list we want to keep moving points down
     }
-
-    /// <summary>
-    /// Takes in a point and returns a list of points if the there is a match
-    /// </summary>
-    /// <param name="p"></param>
-    /// <returns></returns>
-    public List<Point> check_match(int x, int y)
+    
+    
+    public List<Point> check_match()
     {
-        List<Point> result = new();
+        List<Point> _temps_horizontal = [];
+        List<Point> _temps_vertical = [];
 
-        // Vertical
-        switch (y)
+        foreach (var p in this.grid)
         {
-            case 0:
-                // we are at the top of the grid
-                
-                break;
+            _temps_horizontal.Add(p[0]);
+            for (var i = 1; i < p.Length; i++)
+            {
+                if (p[i].value == _temps_horizontal[0].value) // Check if the values are equal 
+                {
+                    _temps_horizontal.Add(p[i]); // Adds it to the list 
+                }
+
+                // We want to do this after so the above if statement doesnt run after running this one
+                if (p[i].value != _temps_horizontal[0].value) // If the values are not equal then
+                {
+                    _temps_horizontal.Clear(); // Clear the list 
+                    _temps_horizontal.Add(p[i]); // And set the value to the current
+                }
+            }
+
+            if (_temps_horizontal.Count > 3)
+            {
+                _temps_horizontal.Clear();
+            }
         }
+        if (_temps_horizontal.Count > 3)
+        {
+            _temps_horizontal.Clear();
+        }
+
         
-        return result;
+        return _temps_horizontal;
     }
 }
 
