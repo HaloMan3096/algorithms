@@ -69,3 +69,53 @@ This has a Big O of O(n), because the time scales based on how large the exponen
 3. For the power we loop through and multiply temp var by the base
 4. Return the temp var
 </details>
+
+### Assignment: Algorithm Creation and Analysis II (Matryoshka)
+- [X] Create an algorithm that will count how many dolls there are in total from all sets.
+- [X] Analyze your algorithm using big O notation.
+<details>
+<summary>Algorithm</summary>
+  <i>I might have gone a bit overboard on this one</i>
+  
+  For this assignment I created a basic doll class that holds a reference to another doll class <i>(not unlike a linked list)</i>. 
+  In the constructor for this class we take in an optional number, this number tells us how many dolls you want to create.
+  In the constructor we recursivly call subtracting one from the inputted number.
+  
+  ```
+    internal class NestingDoll
+    {
+      private readonly NestingDoll _innerDoll;
+      private NestingDoll GetInnerDoll() { return _innerDoll; }
+    
+      public NestingDoll(int howManyInnerDolls = 1) 
+      {
+        _innerDoll = howManyInnerDolls <= 0 ? null : new NestingDoll(howManyInnerDolls - 1); 
+      }
+
+      public int CountInnerDolls()...
+    }
+  ```
+
+  Then to get the actual count of inner dolls was simple, we know that the last doll will have an inner doll value of null.
+  So we can loop through and increment an int and set the current doll to the old doll's inner doll.
+  Once the current doll is null we have hit the end of the chain of dolls.
+
+  ```
+    public int CountInnerDolls()
+    {
+        var count = 0; 
+        var currentDoll = this._innerDoll; 
+        while (currentDoll != null) 
+        {
+            ++count; // We increment the count
+            currentDoll = currentDoll.GetInnerDoll(); 
+        }
+        return count; 
+    }
+  ```
+</details>
+<details>
+<summary>Break Down</summary>
+  The code above in the algorithm drop down, getting the cound of the total dolls is actually linear time complexity <i>O(x)</i>.
+  Since we are using a while loop the code takes as long to run as there are number of dolls to execute.
+</details>
