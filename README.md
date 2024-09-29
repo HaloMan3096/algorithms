@@ -71,8 +71,13 @@ This has a Big O of O(n), because the time scales based on how large the exponen
 </details>
 
 ### Assignment: Algorithm Creation and Analysis II (Matryoshka)
-- [X] Create an algorithm that will count how many dolls there are in total from all sets.
+- [X] Part 1: Create an algorithm that will count how many dolls there are in total from all sets.
+- [ ] Part 2: Create an algorithm that will line the doll sets up from the one with the smallest nested amount to the largest.
+- [ ] Part 3: One of the dolls is unique and has the artist’s signature on it. Create an algorithm that searches through all dolls in all sets until it finds the one with the signature (and then stops).
 - [X] Analyze your algorithm using big O notation.
+
+<details>
+<summary>PART 1</summary>
 <details>
 <summary>Algorithm</summary>
   <i>I might have gone a bit overboard on this one</i>
@@ -118,4 +123,13 @@ This has a Big O of O(n), because the time scales based on how large the exponen
 <summary>Break Down</summary>
   The code above in the algorithm drop down, getting the cound of the total dolls is actually linear time complexity <i>O(x)</i>.
   Since we are using a while loop the code takes as long to run as there are number of dolls to execute.
+</details>
+</details>
+
+<details>
+<summary>PART 2</summary>
+<details>
+<summary>Algorithm<summary>
+Continuing with the same doll class from above
+</details>
 </details>
