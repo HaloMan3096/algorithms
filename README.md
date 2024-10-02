@@ -181,3 +181,163 @@ public static NestingDoll findTheSignedOne(List<NestingDoll> nestingDolls)
 This only checks the outside doll for a signiture allowing it to be O(n) since at most it only takes however many dolls there are in total. 
 if you wanted to be able to hide the signiture further in you would have to loop through each of the dolls inner dolls this would make the time O(n<sup>2</sup>).
 </details>
+
+### Match 3 Recursion
+- [ ] Create a 2D grid and populate it with numbers, present the entire 2D grid in the console window
+- [ ] In order to play the game users will need to input a row and column
+- [ ] The values above it need to "fall" and you need to fill the column back up
+- [ ] Check if there are any matches made as a part of this process of numbers falling down in rows and columns
+BONUS:
+- [ ] Implement swapping
+- [ ] powerup that destroys all of the values that the powerup swapped with
+
+<details>
+<summary>Point Class</summary>
+A simple class that holds a value of our choice and has some basic functions. points with a value of - are dead cells and will be replaced.
+the get_random_value() function is used to fill the grid and replace the values at the top of the list.
+
+```
+class Point
+{
+    public string value;
+    public Point(string value = "-")
+    {
+        this.value = value; 
+    }
+
+    public static String get_random_value()
+    {
+        Random random = new();
+        return random.Next(1,5).ToString();
+    }
+}
+```
+</details>
+<details>
+<summary>The Grid Class</summary>
+Our grid class is only created the once and we call functions on it to modify the values of the grid. The grid class holds a list of list of points "Point[][]".
+
+In the constructor we require a width and a height for the grid size. we then assign the grid to the height with "new Point[Height][]"
+
+```
+internal class Grid {
+    public Point[][] grid;
+    public int score = 0;
+
+    public Grid( int width, int height )
+    {
+        grid = new Point[height][]; // Set up the outside array
+        for (var i = 0; i < grid.Length; i++) // Set up the inner arrays
+        {
+            grid[i] = new Point[width];
+        }
+        this.fill_grid();
+    }
+
+    private void fill_grid()...
+
+    public Point get_value(int x, int y)...
+
+    public (int, int) get_coordinate_from_point(Point p)...
+
+    public void destroy_value(int x, int y)...
+
+    public void update_value(int x, int y)...
+    
+    public List<List<Point>> check_match()...
+}
+```
+
+Once we have created the grid we then call fill_grid() on it. In this function we loop through both the outer and inner lists and create a new point with random values.
+This is why we created the static get_random_value() on the point class.
+
+```
+private void fill_grid()
+{
+    foreach (var t in this.grid)
+    {
+        for (var y = 0; y < t.Length; y++) 
+        {
+            t[y] = new Point(Point.get_random_value());
+        }
+    }
+}
+```
+
+  <details>
+  <summary>get_value()</summary>
+  We take two values an x and a y. We check that the point accually exists before sending back the point at the coordinate.
+
+  We use this to find the point the user selects and then we "destroy" the value.
+
+  ```
+  public Point get_value(int x, int y) 
+  {
+      if (x > this.grid.Length || y > this.grid[0].Length)
+      {
+          return null;
+      }
+      return this.grid[x][y];
+  }
+  ```
+  </details>
+
+  <details>
+  <summary>get_coordinate_from_point()</summary>
+  This is the inverse function from get_value(). this one takes in a Point and returns an x and y value.
+
+  BUG: the result from this function actually ends up looking like (y, x) so when looking for y value later we should use item1 not item2
+
+  ```
+  public (int, int) get_coordinate_from_point(Point p)
+  {
+      var result = (-1, -1);
+      for (var y = 0; y < this.grid.Length; y++)
+      {
+          for (var x = 0; x < this.grid[y].Length; x++)
+          {
+              if (this.grid[y][x] == p)
+              {
+                  result = (x, y);
+              }
+          }
+      }
+      return result;
+  }
+  ```
+  </details>
+
+  <details>
+  <summary>destroy_value()</summary>
+  As we said in the Point class, any point with the value of "-" is considered dead. So to destroy a Point we change the points value to "-"
+
+  ```
+  public void destroy_value(int x, int y)
+  {
+      this.grid[x][y].value = "-";
+  }
+  ```
+  </details>
+
+  <details>
+  <summary>update_value()</summary>
+  This function is called to do the drop down effect. we loop through from the point that we "deleted". We check the y value of the point and make sure its not the top one.
+  
+
+  ```
+  public void update_value(int x, int y)
+  {
+      if (x >= 1)
+      {
+          this.grid[x][y].value = this.grid[x - 1][y].value; 
+      }
+      if (x == 0) // if at the top we need a new random value
+      {
+          this.grid[x][y].value = Point.get_random_value();
+          return; // we also want to escape the recursion when were at the top
+      }
+      this.update_value(x - 1, y); // as long as were not at the top of the list, we want to keep moving points down
+  }
+  ```
+  </details>
+</details>
