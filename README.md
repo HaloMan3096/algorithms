@@ -14,7 +14,7 @@
 
 <details>
 <summary> Linear </summary>
-  
+
   ```
   foreach (var s in args)
   {
@@ -321,8 +321,7 @@ private void fill_grid()
 
   <details>
   <summary>update_value()</summary>
-  This function is called to do the drop down effect. we loop through from the point that we "deleted". We check the y value of the point and make sure its not the top one.
-  
+  This function is called to do the drop-down effect. we loop through from the point that we "deleted". We check the y value of the point and make sure its not the top one.
 
   ```
   public void update_value(int x, int y)
@@ -337,6 +336,75 @@ private void fill_grid()
           return; // we also want to escape the recursion when were at the top
       }
       this.update_value(x - 1, y); // as long as were not at the top of the list, we want to keep moving points down
+  }
+  ```
+  </details>
+
+  <details>
+  <summary>check_match()</summary>
+  we want to return a list of the matches.
+
+  ```
+  public List<List<Point>> check_match()
+  {
+      List<List<Point>> matches = [];
+
+      // HORIZONTAL
+      foreach (var row in this.grid)
+      {   // [Point, Point, Point...]
+          List<Point> match = [row[0]];
+          for (var x = 1; x < row.Length; x++)
+          {
+            if (row[x].value != match[0].value && match.Count < 3)
+          {
+            match.Clear();
+            match.Add(row[x]);
+            continue;
+          }
+          if (row[x].value == match[0].value)
+          {
+            match.Add(row[x]);
+          }
+        }
+        if (match.Count >= 3)
+        {
+          matches.Add(match);
+        }
+        else
+        {
+          match.Clear();
+        }
+      }
+        
+      // VERTICAL
+      foreach (var p in this.grid.Last())
+      {
+        List<Point> match = [p]; // Starting point
+        var y = this.get_coordinate_from_point(p).Item1;
+        for (var x = (this.grid.Length - 1); x > 0; x--)
+        {
+          if (this.grid[x][y].value != match[0].value && match.Count < 3)
+          {
+            match.Clear();
+            match.Add(this.grid[x][y]);
+            continue;
+          }
+
+          if (this.grid[x][y].value == match[0].value)
+          {
+            match.Add(this.grid[x][y]);
+          }
+        }
+        if (match.Count >= 3)
+        {
+          matches.Add(match);
+        }
+        else
+        {
+          match.Clear();
+        }
+    }    
+    return matches;
   }
   ```
   </details>
