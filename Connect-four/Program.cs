@@ -12,10 +12,14 @@ class Program
 
     static void loop(Board board)
     {
+        // Swap players
+        Player.Instance.ChangePlayer();
+        
         // Draw
         Draw(board);
         
         // Dropping
+        Console.WriteLine("Player " + Player.Instance.InstanceState + "'s turn");
         Console.WriteLine("Enter a colum number: ");
         var input = int.TryParse(Console.ReadLine(), out int col) ? col - 1 : -1;
         if (input > board.GridBoard[0].Length - 1)
@@ -28,17 +32,19 @@ class Program
             // Drop
             board.Drop(input);
             
+            // Re-Draw
+            Draw(board);
+            board.IsMatch();
+            
             // Check for match
-            Console.WriteLine(board.IsMatch());
             if (board.IsMatch())
             {
                 Console.WriteLine("You entered a match");
                 return;
             }
-            
-            // Swap players
-            Player.Instance.ChangePlayer();
         }
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
 
         if (board.IsMatch())
         {
@@ -151,12 +157,12 @@ class Board
 
     public bool IsMatch()
     {
-        var h = Horizontal();
+        var h = Horizontal(); // TODO: Only works on col that aren't the first one?
         if (h == true)
         {
             return true;
         }
-        var v = Vertical();
+        var v = Vertical(); // TODO: Doesn't work rn
         if (v == true)
         {
             return true;
@@ -167,43 +173,44 @@ class Board
 
     private bool Horizontal()
     {
-        foreach (var spaces in GridBoard)
+        // This will get us each row
+        foreach (var spaces in GridBoard) 
         {
-            List<State> temp = [spaces[0].state];
-            for (var i = 1; i < spaces.Length; i++)
+            // we set our list of matches to the first one
+            List<Space> temp = [spaces[0]]; 
+            for (var i = 0; i < spaces.Length; i++)
             {
-                if (temp[0] != spaces[i].state)
+                // If the state is different we want to reset with the new state
+                if (temp[0].state != spaces[i].state)
                 {
                     temp.Clear();
-                    temp.Add(spaces[i].state);
+                    temp.Add(spaces[i]);
                     continue;
                 }
 
-                if (spaces[i].state != State.Empty)
+                // We want to make sure it's not empty or the in the list already
+                if (spaces[i].state != State.Empty && temp[0] != spaces[i]) 
                 {
-                    temp.Add(spaces[i].state);
+                    temp.Add(spaces[i]);
                 }
             }
 
+            // We check that the list of matches is at least 4
             if (temp.Count >= 4)
             {
                 return true;
             }
-            else
-            {
-                temp.Clear();
-            }
+            temp.Clear();
         }
-
         return false;
     }
 
     private bool Vertical()
     {
-        for (int i = 0; i < GridBoard[0].Length - 1; i++)
+        for (int i = 0; i < GridBoard[0].Length; i++)
         {
             List<State> temp = [GridBoard[i][0].state];
-            for (int j = 0; j < GridBoard.Length - 1; j++)
+            for (int j = 0; j < GridBoard.Length; j++)
             {
                 if (GridBoard[i][j].state != temp[0])
                 {
